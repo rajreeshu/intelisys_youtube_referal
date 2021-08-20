@@ -41,8 +41,8 @@ class Welcome extends CI_Controller {
 
 	public function dashboard(){
 		
-		if($user_id=$this->security->xss_clean($this->session->userdata('intelisys_referal_program'))){
-
+		if($this->security->xss_clean($this->session->userdata('intelisys_referal_program'))){
+			$user_id=$this->security->xss_clean($this->session->userdata('intelisys_referal_program'));
 			$user_data=$this->db->select('referal_id,subscribed')->where('user_id',$user_id)->get("user_detail")->row();
 			$total_referal=$this->db->where("refered_by",$user_data->referal_id)->get("user_detail")->num_rows();
 			$this->session->unset_userdata('intelisys_referal_program_refered_by');
